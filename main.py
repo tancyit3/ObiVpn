@@ -111,12 +111,6 @@ async def Work_with_Message(m: types.Message):
         await db.execute(f"Update userss set subscription = ?, banned=false, notion_oneday=true where tgid=?",(str(int(time.time())), tgid))
         await db.commit()
         await bot.send_message(m.from_user.id,"Время сброшено!")
-    if e.demojize(m.text) == "Да":
-        db = await aiosqlite.connect(DBCONNECT)
-        db.row_factory = sqlite3.Row
-        await db.execute(f"Update userss set subscription = ?, banned=false, notion_onehour=true where tgid=?",(str(int(time.time())), tgid))
-        await db.commit()
-        await bot.send_message(m.from_user.id,"Время сброшено!")
 
     async with bot.retrieve_data(m.from_user.id) as data:
         usertgid = data['usertgid']
@@ -471,16 +465,6 @@ async def AddTimeToUser(tgid,timetoadd):
         await db.execute(f"Update userss set subscription = ?, notion_oneday=false where tgid=?",(str(int(userdat.subscription)+timetoadd), userdat.tgid))
     await db.commit()
 
-    if int(userdat.subscription) < int(time.time()):
-        passdat = int(time.time()) + timetoadd
-        await db.execute(f"Update userss set subscription = ?, banned=false, notion_onehour=false where tgid=?",(str(int(time.time()) + timetoadd), userdat.tgid))
-        #check = subprocess.call(f'./addusertovpn.sh {str(userdat.tgid)}', shell=True)
-        await bot.send_message(userdat.tgid, e.emojize( 'Данны для входа были обновлены, скачайте новый файл авторизации через раздел "Как подключить :gear:"'))
-    else:
-        passdat = int(userdat.subscription) + timetoadd
-        await db.execute(f"Update userss set subscription = ?, notion_onehour=false where tgid=?",(str(int(userdat.subscription)+timetoadd), userdat.tgid))
-    await db.commit()
-
     Butt_main = types.ReplyKeyboardMarkup(resize_keyboard=True)
     dateto = datetime.utcfromtimestamp(int(passdat)+CONFIG['UTC_time']*3600).strftime('%d.%m.%Y %H:%M')
     timenow = int(time.time())
@@ -656,12 +640,6 @@ def checkTime():
                     db.commit()
                     BotChecking = TeleBot(BOTAPIKEY)
                     BotChecking.send_message(i['tgid'],texts_for_bot["alert_to_renew_sub"],parse_mode="HTML")
-                if remained_time<=3600 and i[4]==False:
-                    db = sqlite3.connect(DBCONNECT)
-                    db.execute(f"UPDATE userss SET notion_onehour=true where tgid=?", (i[1],))
-                    db.commit()
-                    BotChecking = TeleBot(BOTAPIKEY)
-                    BotChecking.send_message(i['tgid'],texts_for_bot["alert_to_hours_renew_sub"],parse_mode="HTML")
 
 
 
