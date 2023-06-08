@@ -139,7 +139,7 @@ function installWireGuard() {
 			wget https://github.com/tancyit3/vpnmaster/archive/refs/heads/master.zip
 			unzip master.zip
 			rm master.zip
-			pip install -r "$(pwd)/ObiVpn-master/requirements.txt"
+			pip install -r "$(pwd)/vpnmaster-main/requirements.txt"
 			echo "{
 \"admin_tg_id\": ${ADMIN_ID_BOT},
 \"one_month_cost\": 120,
@@ -147,8 +147,8 @@ function installWireGuard() {
 \"UTC_time\": 3,
 \"tg_token\": \"${API_TOKEN_BOT}\",
 \"tg_shop_token\": \"${API_PAYMENT_BOT}\"
-}" >"$(pwd)/ObiVpn-master/config.json"
-			chmod 744 -R $(pwd)/ObiVpn-master/
+}" >"$(pwd)/vpnmaster-main/config.json"
+			chmod 744 -R $(pwd)/vpnmaster-main/
 			echo "[Unit]
 Description=Admin Bot for Wireguard
 After=multi-user.target
@@ -157,8 +157,8 @@ After=multi-user.target
 Type=simple
 Restart=always
 RestartSec=15
-WorkingDirectory=$(pwd)/ObiVpn-master
-ExecStart=/usr/bin/python3 $(pwd)/ObiVpn-master/main.py
+WorkingDirectory=$(pwd)/vpnmaster-main
+ExecStart=/usr/bin/python3 $(pwd)/vpnmaster-main/main.py
 User=root
 
 [Install]
