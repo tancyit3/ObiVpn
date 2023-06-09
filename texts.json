@@ -4,6 +4,5 @@
   "how_to_connect_info": "Ваш конфиг для подключения к VPN\n\nСсылки на приложение:\n <a href='https://apps.apple.com/us/app/wireguard/id1441195209'>iPhone</a>\n<a href='https://play.google.com/store/apps/details?id=com.wireguard.android'>Android</a>\n\n По всем вопросам и проблемам писать сюда: @WHYDEDICATED",
   "success_pay_message": "Оплата прошла успешно!\nПодписка продлена, спасибо что выбираете нас.",
   "ended_sub_message": "Ваша подписка закончилась!\n\nЕсли хотите продолжить пользоваться нашими услугами, пожалуйста продлите подписку.",
-  "alert_to_renew_sub": "До конца действия подписки осталось меньше дня, пора продлить ее!",
-  "alert_to_hours_renew_sub": "До конца действия подписки осталось меньше 1 часа, пора продлить ее!"
+  "alert_to_renew_sub": "До конца действия подписки осталось меньше дня, пора продлить ее!" 
 }
